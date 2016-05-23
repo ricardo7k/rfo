@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Super Test</title>
+  <meta charset='UTF-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="language" content="pt" />
+  <script src="js/rfo.js"></script>
+</head>
+<body>
+  <p id="pid">O PID</p>
+  <p class="classe">O CLASSE Item 1</p>
+  <p class="classe">O CLASSE Item 2</p>
+
+  <script>
+    rfo.extends("overlay","spin","loader","array_extends");
+    rfo.load = function() {
+      console.info(1);
+      rfo.resize();
+    }
+    rfo.resize = function() {
+      console.info(2);
+    }
+    var listp = _("p");
+  </script>
+</body>
+</html>
