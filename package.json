@@ -1,0 +1,28 @@
+{
+  "name": "rfo",
+  "version": "1.0.8",
+  "description": "Simple js package to work with dom, event and basic functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "_('body')"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ricardo7k/rfo.git"
+  },
+  "keywords": [
+    "javascript",
+    "dom",
+    "jquery",
+    "simple",
+    "selector"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "author": "Caca Ferreira <ricardo7k@yahoo.com.br> (http://rfo.im)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/ricardo7k/rfo/issues"
+  },
+  "homepage": "https://github.com/ricardo7k/rfo#readme"
+}

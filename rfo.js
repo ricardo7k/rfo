@@ -5,8 +5,8 @@
  # -*- coding: utf-8 -*-
  # @Author: ricardo7k@yahoo.com.br
  # @Date:   2016-05-23 15:00:00
- # @Last Modified by: ricardo7k@yahoo.com.br
- # @Last Modified time: 2016-05-23 15:00:00
+ # @Last Modified by: ricardo7k@yahoo.com.br & Alan Pertinhez
+ # @Last Modified time: 2016-05-23 16:00:00
  */
 // Create object
 var rfo = function(selector) {
@@ -19,7 +19,7 @@ var rfo = function(selector) {
 rfo.extends = function() {
   for(var i=0; i<arguments.length; i++) {
     var scp = document.createElement("script");
-    scp.src = "js/libs/" + arguments[i] + ".js";
+    scp.src = "libs/" + arguments[i] + ".js";
     _("head").el.appendChild(scp);
   }
 }
