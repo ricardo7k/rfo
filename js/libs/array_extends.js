@@ -1,3 +1,15 @@
+/**
+ * Array extends - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
+ * Array functions to extend vector and list control
+ *
+ * @package rfo/libs
+ # -*- coding: utf-8 -*-
+ # @Author: ricardo7k@yahoo.com.br
+ # @Date:   2016-05-23 15:00:00
+ # @Last Modified by: ricardo7k@yahoo.com.br
+ # @Last Modified time: 2016-05-23 15:00:00
+ */
+
 'use strict';
 
 // Add ECMA262-5 method binding if not supported natively

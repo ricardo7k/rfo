@@ -1,3 +1,13 @@
+/**
+ * rfo - simple javascript dom/events controller
+ *
+ * @package rfo
+ # -*- coding: utf-8 -*-
+ # @Author: ricardo7k@yahoo.com.br
+ # @Date:   2016-05-23 15:00:00
+ # @Last Modified by: ricardo7k@yahoo.com.br
+ # @Last Modified time: 2016-05-23 15:00:00
+ */
 
 var rfo = function(selector) {
   this.selector = selector || null;

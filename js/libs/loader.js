@@ -1,3 +1,14 @@
+/**
+ * Loader - simple ajax functions implementation
+ *
+ * @package rfo/libs
+ # -*- coding: utf-8 -*-
+ # @Author: ricardo7k@yahoo.com.br
+ # @Date:   2016-05-23 15:00:00
+ # @Last Modified by: ricardo7k@yahoo.com.br
+ # @Last Modified time: 2016-05-23 15:00:00
+ */
+
 rfo.Loader = {
 	params: {},
 	method: "POST",

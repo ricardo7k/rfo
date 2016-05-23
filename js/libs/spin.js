@@ -1,9 +1,15 @@
-//fgnass.github.com/spin.js#v1.3.2
-
 /**
- * Copyright (c) 2011-2013 Felix Gnass
- * Licensed under the MIT license
+ * Spin - fgnass.github.com/spin.js#v1.3.2
+ * simple Spin dom function and crontrol
+ *
+ * @package rfo/libs
+ # -*- coding: utf-8 -*-
+ # @Author: Felix Gnass
+ # @Date:   2013-05-23 15:00:00
+ # @Last Modified by: ricardo7k@yahoo.com.br
+ # @Last Modified time: 2016-05-23 15:00:00
  */
+
 (function(root, factory) {
 
  /* CommonJS */
