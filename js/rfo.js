@@ -8,13 +8,14 @@
  # @Last Modified by: ricardo7k@yahoo.com.br
  # @Last Modified time: 2016-05-23 15:00:00
  */
-
+// Create object
 var rfo = function(selector) {
   this.selector = selector || null;
   this.element = this.el = null;
   this.elements = this.elmts = this.els = null;
   this.objects = this.objs = [];
 };
+//Static Functions
 rfo.extends = function() {
   for(var i=0; i<arguments.length; i++) {
     var scp = document.createElement("script");
@@ -102,6 +103,7 @@ rfo.device = {
     }
   }
 }
+//Prototype object Functions
 rfo.prototype.scrollTo = function(duration) {
     if(this.offset()) {
       if (duration <= 0) return;
@@ -212,6 +214,7 @@ rfo.prototype.offset = function() {
     left: this.element.getBoundingClientRect().left + document.body.scrollLeft
   };
 };
+//Event Functions
 rfo.prototype.addEventListener = function(event, callback, siblings) {
   if(siblings) {
     for(obj in this.elements) {
@@ -260,6 +263,7 @@ rfo.prototype.eventHandler = {
     }, event);
   }
 };
+//Abstract Static to Object Link
 var _ = function(selector) {
   var el = new rfo(selector);
   el.init();
@@ -269,7 +273,7 @@ var _ = function(selector) {
     throw 'ErroRFO(#001) - Seletor não encontrado.';
   }
 }
-
+// Simple init onLoad, resize and Animation
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame       ||
           window.webkitRequestAnimationFrame ||
@@ -296,7 +300,7 @@ if(window.onload) {
     rfo.load(e);
   }, false);
 }
-
+//Fallback document.getElementsByClassName
 if(!document.getElementsByClassName) {
     document.getElementsByClassName = function(className) {
         return this.querySelectorAll("." + className);
