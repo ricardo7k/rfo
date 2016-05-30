@@ -9,6 +9,18 @@
  # @Last Modified time: 2016-05-23 16:00:00
  */
 // Create object
+/*
+  The project object thats create independente object extends native functions.
+  rfo: {
+    element: DOM Element,
+    elements: NodeList,
+    object: RFO object,
+    objects: RFO Array Objects,
+    Static Functions
+    Dynamic Functions
+    Handler Functions
+  }
+*/
 var rfo = function(selector) {
   this.selector = selector || null;
   this.element = this.el = null;
@@ -22,9 +34,12 @@ rfo.extends = function() {
     scp.src = "libs/" + arguments[i] + ".js";
     _("head").el.appendChild(scp);
   }
-}
-rfo.resize = function() { }
-rfo.load = function() { }
+};
+
+rfo.resize = function() { };
+
+rfo.load = function() { };
+
 rfo.dump = function(obj) {
   var out = '';
   for (var i in obj) {
@@ -35,14 +50,15 @@ rfo.dump = function(obj) {
   } else if(console.log){
     console.log(out);
   }
-}
+};
+
 rfo.setCookie = function(c_name, value, exdays) {
   var exdate=new Date();
   exdate.setDate(exdate.getDate() + exdays);
-  var c_value=escape(value) +
-    ((exdays==null) ? "" : ("; expires="+exdate.toUTCString()));
+  var c_value=escape(value) + ((exdays==null) ? "" : ("; expires="+exdate.toUTCString()));
   document.cookie=c_name + "=" + c_value;
-}
+};
+
 rfo.getCookie = function(c_name) {
   var i,x,y,ARRcookies=document.cookie.split(";");
   for (i=0;i<ARRcookies.length;i++) {
@@ -53,7 +69,8 @@ rfo.getCookie = function(c_name) {
       return unescape(y);
     }
   }
-}
+};
+
 rfo.stopEvent = function(e) {
   if(!e) var e = window.event;
   e.cancelBubble = true;
@@ -61,7 +78,8 @@ rfo.stopEvent = function(e) {
   if (e.stopPropagation) e.stopPropagation();
   if (e.preventDefault) e.preventDefault();
   return false;
-}
+};
+
 rfo.stageSize = function() {
   if( typeof( window.innerWidth ) == 'number' ) {
       _width = window.innerWidth;
@@ -74,7 +92,8 @@ rfo.stageSize = function() {
       _height = document.body.clientHeight;
   }
   return { width: _width, height: _height };
-}
+};
+
 rfo.navigator = {
   isIE: function () {
       var myNav = navigator.userAgent.toLowerCase();
@@ -85,7 +104,8 @@ rfo.navigator = {
   name: function() {
     return navigator.userAgent.toLowerCase();
   }
-}
+};
+
 rfo.device = {
   ipad: function() {
     return (navigator.userAgent.match(/iPad/i))?true:false;
@@ -102,7 +122,7 @@ rfo.device = {
       return true;
     }
   }
-}
+};
 //Prototype object Functions
 rfo.prototype.scrollTo = function(duration) {
     if(this.offset()) {
@@ -117,7 +137,7 @@ rfo.prototype.scrollTo = function(duration) {
     } else {
       throw 'ErroRFO(#002) - Precisa do rfo.offset().';
     }
-}
+};
 
 rfo.prototype.addClass = function(classe) {
   if(this.element.className.indexOf(classe)>-1) {
@@ -125,7 +145,7 @@ rfo.prototype.addClass = function(classe) {
   } else {
     this.element.className += " " + classe;
   }
-}
+};
 
 rfo.prototype.removeClass = function(classe) {
   if(classe == "all") {
@@ -137,7 +157,8 @@ rfo.prototype.removeClass = function(classe) {
       this.element.className = this.element.className.split(classe).join("");
     }
   }
-}
+};
+
 rfo.prototype.init = function() {
   switch (this.selector[0]) {
     case '<':
@@ -169,6 +190,7 @@ rfo.prototype.init = function() {
 
   }
 };
+
 rfo.prototype.mouse = function(e) {
   var rect = this.element.getBoundingClientRect();
   var rectLeft = rect.left;
@@ -180,7 +202,7 @@ rfo.prototype.mouse = function(e) {
     y: (e.clientY - rectTop) * cssScaleY,
     element: this.element
   }
-}
+};
 
 rfo.prototype.each = function(_function) {
   if(rfo.navigator.isIE && rfo.navigator.ieVersion<8) {
@@ -193,9 +215,11 @@ rfo.prototype.each = function(_function) {
       Array.prototype.forEach.call(this.elements, _function);
   }
 };
+
 rfo.prototype.child = function(selector) {
   return this.element.querySelectorAll(selector);
 };
+
 rfo.prototype.rect = function(borders) {
   if(borders) {
     this.element.style.border = "1px solid black";
@@ -208,6 +232,7 @@ rfo.prototype.rect = function(borders) {
     height: this.element.offsetHeight
   };
 };
+
 rfo.prototype.offset = function() {
   return {
     top: this.element.getBoundingClientRect().top + document.body.scrollTop,
@@ -225,7 +250,8 @@ rfo.prototype.addEventListener = function(event, callback, siblings) {
   } else {
     var evt = this.eventHandler.bindEvent(event, callback, this.element);
   }
-}
+};
+
 rfo.prototype.removeEventListener = function(event, siblings) {
   if(siblings) {
     for(obj in this.elements) {
@@ -236,7 +262,8 @@ rfo.prototype.removeEventListener = function(event, siblings) {
   } else {
     var evt = this.eventHandler.unbindEvent(event, this.element);
   }
-}
+};
+
 rfo.prototype.eventHandler = {
   events: [],
   bindEvent: function(event, callback, targetElement) {
@@ -270,40 +297,42 @@ var _ = function(selector) {
   if(el.elements || el.element) {
     return el;
   } else {
-    throw 'ErroRFO(#001) - Seletor não encontrado.';
+    throw 'ErroRFO(#001) - Seletor não encontrado:';
   }
-}
-// Simple init onLoad, resize and Animation
-window.requestAnimFrame = (function(){
-  return  window.requestAnimationFrame       ||
-          window.webkitRequestAnimationFrame ||
-          window.mozRequestAnimationFrame    ||
-          function( callback ){
-            window.setTimeout(callback, 1000 / 60);
-          };
-})();
+};
+(function() {
+  // Simple init onLoad, resize and Animation
+  window.requestAnimFrame = (function(){
+    return  window.requestAnimationFrame       ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
+            function( callback ){
+              window.setTimeout(callback, 1000 / 60);
+            };
+  })();
 
-window.onresize = new function(e) { };
-window.onload = new function(e) { };
+  window.onresize = new function(e) { };
+  window.onload = new function(e) { };
 
-if(window.onresize) {
-  window.onresize = function(e) {
-    rfo.resize(e);
+  if(window.onresize) {
+    window.onresize = function(e) {
+      rfo.resize(e);
+    }
   }
-}
-if(window.onload) {
-  window.onload = function(e) {
+  if(window.onload) {
+    window.onload = function(e) {
+        rfo.load(e);
+    }
+  } else {
+    document.addEventListener('DOMContentLoaded', function(e){
       rfo.load(e);
+    }, false);
   }
-} else {
-  document.addEventListener('DOMContentLoaded', function(e){
-    rfo.load(e);
-  }, false);
-}
-//Fallback document.getElementsByClassName
-if(!document.getElementsByClassName) {
-    document.getElementsByClassName = function(className) {
-        return this.querySelectorAll("." + className);
-    };
-    Element.prototype.getElementsByClassName = document.getElementsByClassName;
-}
+  //Fallback document.getElementsByClassName
+  if(!document.getElementsByClassName) {
+      document.getElementsByClassName = function(className) {
+          return this.querySelectorAll("." + className);
+      };
+      Element.prototype.getElementsByClassName = document.getElementsByClassName;
+  }
+})();

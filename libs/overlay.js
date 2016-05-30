@@ -13,7 +13,6 @@ rfo.Overlay = {
   object: null,
   init: function(){
     if(!rfo.Overlay.object) {
-      console.info(rfo.Overlay.object);
       rfo.Overlay.object = document.createElement("div");
       try { rfo.Overlay.object.style.backgroundColor = "rgba(0,0,0,.7)"; }
       catch(e) { rfo.Overlay.object.style.background = "url('img/transpbg.png')"; };
