@@ -14,8 +14,9 @@ rfo.Overlay = {
   init: function(){
     if(!rfo.Overlay.object) {
       rfo.Overlay.object = document.createElement("div");
-      try { rfo.Overlay.object.style.backgroundColor = "rgba(0,0,0,.7)"; }
-      catch(e) { rfo.Overlay.object.style.background = "url('img/transpbg.png')"; };
+      rfo.Overlay.object.style.backgroundColor = "rgba(0,0,0,.7)";
+      rfo.Overlay.object.style.width = "100%";
+      rfo.Overlay.object.style.height = "100%";
       rfo.Overlay.object.style.position = "fixed";
       rfo.Overlay.object.style.zIndex = "100";
       rfo.Overlay.object.id = "rfo_overlay";
@@ -37,7 +38,7 @@ rfo.Overlay = {
   hide: function() {
     if(!rfo.Overlay.opened) return;
     rfo.Overlay.opened = false;
-    _("body")[0].style.overflow = "";
+    _("body").el.style.overflow = "";
     if(rfo.Overlay.object) {
       _("body").el.removeChild(rfo.Overlay.object);
     }

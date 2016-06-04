@@ -39,15 +39,15 @@ rfo.Loader = {
     }
   },
   handler: function() {
-    if (Load.xhr.readyState == 4) {
-      if (Load.xhr.status == 200) {
-        Load.callback.done(Load.xhr);
+    if (rfo.Loader.xhr.readyState == 4) {
+      if (rfo.Loader.xhr.status == 200) {
+        rfo.Loader.callback.done(rfo.Loader.xhr);
       } else {
-        Load.callback.error("ErrorLoad(#002) - " + Load.xhr + " , " + Load.xhr.status);
+        rfo.Loader.callback.error("ErrorLoad(#002) - " + rfo.Loader.xhr + " , " + rfo.Loader.xhr.status);
       }
     }
   },
-	save: function($url)
+	call: function($url)
 	{
     this.url = $url;
     this.xhr = this.getXHR();
