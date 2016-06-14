@@ -28,12 +28,20 @@ var rfo = function(selector) {
   this.objects = this.objs = [];
 };
 //Static Functions
+
+rfo.verbose = true;
+
+rfo.check = function(selector){
+  return document.querySelectorAll(selector);
+};
+
 rfo.extends = function() {
   for(var i=0; i<arguments.length; i++) {
     var scp = document.createElement("script");
     scp.src = (this.path||"") + arguments[i] + ".js";
     _("head").el.appendChild(scp);
   }
+  rfo.allExtends = true;
 };
 
 rfo.setClassPath = function(path){
@@ -50,9 +58,11 @@ rfo.dump = function(obj) {
       out += i + ": " + obj[i] + "\n";
   }
   if(console.info) {
-    console.info(out);
+    if(rfo.verbose) console.info(out);
   } else if(console.log){
-    console.log(out);
+    if(rfo.verbose) console.log(out);
+  } else {
+    if(rfo.verbose) alert(out);
   }
 };
 
@@ -98,13 +108,14 @@ rfo.stageSize = function() {
   return { width: _width, height: _height };
 };
 
+rfo.browser =
 rfo.navigator = {
+  isSafari: (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1),
+  ieVersion: /*@cc_on (function() {switch(@_jscript_version) {case 1.0: return 3; case 3.0: return 4; case 5.0: return 5; case 5.1: return 5; case 5.5: return 5.5; case 5.6: return 6; case 5.7: return 7; case 5.8: return 8; case 9: return 9; case 10: return 10;}})() || @*/ 0,
   isIE: function () {
       var myNav = navigator.userAgent.toLowerCase();
       return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
   },
-  isSafari: (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1),
-  ieVersion: /*@cc_on (function() {switch(@_jscript_version) {case 1.0: return 3; case 3.0: return 4; case 5.0: return 5; case 5.1: return 5; case 5.5: return 5.5; case 5.6: return 6; case 5.7: return 7; case 5.8: return 8; case 9: return 9; case 10: return 10;}})() || @*/ 0,
   name: function() {
     return navigator.userAgent.toLowerCase();
   }
@@ -127,6 +138,34 @@ rfo.device = {
     }
   }
 };
+
+//Javascript Injection
+rfo.js = {
+  Path: function() {
+    var scripts = document.getElementsByTagName('script');
+    return scripts[scripts.length - 1];
+  },
+  Callback: function() {
+    var exec = rfo.js.Path().getAttribute('src').split("callback=");
+    setTimeout(function(_exec) {
+      if(rfo.allExtends && _exec[1]) {
+        eval(_exec[1]+"()");
+      } else {
+        rfo.js.Callback();
+      }
+    }, 1000, exec);
+  }
+}
+
+
+rfo.objectToArray = function(object) {
+  var arr = [];
+  for(var i=0; i<object.length;i++){
+    arr.push(object[i]);
+  }
+  return arr;
+}
+
 //Prototype object Functions
 rfo.prototype.scrollTo = function(duration) {
     if(this.offset()) {
@@ -139,7 +178,7 @@ rfo.prototype.scrollTo = function(duration) {
           _this.scrollTo(duration - 10);
       }, 10, this);
     } else {
-      throw 'ErroRFO(#002) - Precisa do rfo.offset().';
+      if(rfo.verbose) throw 'ErroRFO(#002) - Precisa do rfo.offset().';
     }
 };
 
@@ -168,7 +207,7 @@ rfo.prototype.init = function() {
     case '<':
       var matches = this.selector.match(/<([\w-]*)>/);
       if (matches === null || matches === undefined) {
-        throw 'ErroRFO(#003) - Selector Inválido / Node';
+        if(rfo.verbose) throw 'ErroRFO(#003) - Selector Inválido / Node:' + this.selector;
         return false;
       }
       var nodeName = matches[0].replace('<', '').replace('>', '');
@@ -253,6 +292,7 @@ rfo.prototype.offset = function() {
     left: this.element.getBoundingClientRect().left + document.body.scrollLeft
   };
 };
+
 //Event Functions
 rfo.prototype.addEventListener = function(event, callback, siblings) {
   if(siblings) {
@@ -304,6 +344,7 @@ rfo.prototype.eventHandler = {
     }, event);
   }
 };
+
 //Abstract Static to Object Link
 var _ = function(selector) {
   var el = new rfo(selector);
@@ -311,9 +352,10 @@ var _ = function(selector) {
   if(el.elements || el.element) {
     return el;
   } else {
-    throw 'ErroRFO(#001) - Seletor não encontrado:';
+    throw 'ErroRFO(#001) - Seletor não encontrado: ' + selector;
   }
 };
+
 (function() {
   // Simple init onLoad, resize and Animation
   window.requestAnimFrame = (function(){
