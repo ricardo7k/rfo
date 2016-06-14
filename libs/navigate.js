@@ -86,10 +86,11 @@
     }
   },
   go: function(e){
-    history.pushState(e.currentTarget.id, null, e.currentTarget.href.replace(".html",""));
+    target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+    history.pushState(target.getAttribute("id"), null, target.getAttribute("href").replace(".html",""));
     rfo.Loader.method = "GET";
     rfo.Loader.callback.done = function(e) { rfo.Navigate.inject(e.response); };
-    rfo.Loader.call(e.currentTarget.href);
+    rfo.Loader.call(target.getAttribute("href"));
     rfo.stopEvent(e);
   },
   init: function(local) {
