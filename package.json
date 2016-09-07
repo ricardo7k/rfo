@@ -1,8 +1,8 @@
 {
   "name": "rfo",
-  "version": "1.1.1",
+  "version": "1.1.11",
   "description": "Simple js package to work with dom, event and basic functions",
-  "main": "index.js",
+  "main": "rfo.js",
   "scripts": {
     "test": "_('body')"
   },

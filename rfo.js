@@ -110,7 +110,7 @@ rfo.stageSize = function() {
 
 rfo.browser =
 rfo.navigator = {
-  isSafari: (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1),
+  isSafari: (navigator && navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1),
   ieVersion: /*@cc_on (function() {switch(@_jscript_version) {case 1.0: return 3; case 3.0: return 4; case 5.0: return 5; case 5.1: return 5; case 5.5: return 5.5; case 5.6: return 6; case 5.7: return 7; case 5.8: return 8; case 9: return 9; case 10: return 10;}})() || @*/ 0,
   isIE: function () {
       var myNav = navigator.userAgent.toLowerCase();
@@ -295,7 +295,7 @@ rfo.prototype.offset = function() {
 
 //Event Functions
 rfo.prototype.addEventListener = function(event, callback, siblings) {
-  if(siblings) {
+  if(siblings && this.elements) {
     for(obj in this.elements) {
       if(typeof this.elements[obj]=="object") {
         var evt = this.eventHandler.bindEvent(event, callback, this.elements[obj]);
@@ -352,6 +352,7 @@ var _ = function(selector) {
   if(el.elements || el.element) {
     return el;
   } else {
+    return false;
     throw 'ErroRFO(#001) - Seletor não encontrado: ' + selector;
   }
 };

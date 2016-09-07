@@ -45,4 +45,3 @@ rfo.Overlay = {
   },
   object: null
 }
-rfo.Overlay.init();
